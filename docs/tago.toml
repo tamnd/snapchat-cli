@@ -1,0 +1,10 @@
+title       = "snap"
+baseURL     = "https://snapchat-cli.tamnd.com/"
+description = "Read public Snapchat stories and Spotlight data"
+contentDir  = "content"
+outputDir   = "public"
+theme       = "tago-doks"
+syntaxHighlight = "true"
+
+[params]
+github = "https://github.com/tamnd/snapchat-cli"
