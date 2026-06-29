@@ -26,10 +26,11 @@ docker run --rm ghcr.io/tamnd/snap:latest --help
 ## Usage
 
 ```bash
-snap page <path>                      # fetch one page as a record
-snap page <path> -o json              # as JSON, ready for jq
-snap page <path> --template '{{.Body}}'  # just the readable body text
-snap links <path>                     # the pages it links to, one per line
+snap story nasa                       # public story metadata for @nasa
+snap story @snapchat -o json          # as JSON, ready for jq
+snap spotlight                        # trending Spotlight videos
+snap spotlight -n 10                  # top 10 Spotlight videos
+snap spotlight -o jsonl               # as newline-delimited JSON
 snap --help                           # the whole command tree
 ```
 
@@ -38,10 +39,9 @@ Every command shares one output contract: `-o table|json|jsonl|csv|tsv|url|raw`,
 The default adapts to where output goes (a table on a terminal, JSONL in a
 pipe), so the same command reads well by hand and parses cleanly downstream.
 
-This is a fresh scaffold. It ships one example resource type, `page`, wired end
-to end. Model the real snapchat records in `snapchat/` and declare their
-operations in `snapchat/domain.go`; each one becomes a command, an HTTP
-route, and an MCP tool at once.
+**Note:** Snapchat is Tier C (anti-bot). Requests from datacenter IPs are
+usually blocked by Cloudflare. The CLI exits with code 5 when a block is
+detected, so scripts can distinguish a block from a regular error.
 
 ## Serve it
 
